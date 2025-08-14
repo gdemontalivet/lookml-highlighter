@@ -4,8 +4,15 @@
     "description": "Syntax highlighting for LookML",
     "version": "0.3.1",
     "publisher": "moseleyi",
+    "main": "./linter.js",
+    "activationEvents": [
+        "onLanguage:lookml"
+    ],
     "engines": {
         "vscode": "^1.53.0"
+    },
+    "dependencies": {
+        "@looker/look-at-me-sideways": "^5.0.0"
     },
     "categories": [
         "Programming Languages"
