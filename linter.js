@@ -3,6 +3,13 @@ const Lams = require('@looker/look-at-me-sideways');
 
 function activate(context) {
     const collection = vscode.languages.createDiagnosticCollection('lookml');
+    context.subscriptions.push(vscode.commands.registerCommand('lookml-highlighter.validateLookML', () => {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            updateDiagnostics(editor.document, collection);
+        }
+    }));
+
     if (vscode.window.activeTextEditor) {
         updateDiagnostics(vscode.window.activeTextEditor.document, collection);
     }
@@ -27,6 +34,9 @@ function updateDiagnostics(document, collection) {
             return new vscode.Diagnostic(range, error.message, vscode.DiagnosticSeverity.Error);
         });
         collection.set(document.uri, diagnostics);
+        if (diagnostics.length === 0) {
+            vscode.window.showInformationMessage('LookML validation successful!');
+        }
     } else {
         collection.clear();
     }

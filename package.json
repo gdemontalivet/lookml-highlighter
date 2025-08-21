@@ -30,6 +30,21 @@
         }
     },
     "contributes": {
+        "commands": [
+            {
+                "command": "lookml-highlighter.validateLookML",
+                "title": "Validate LookML"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "when": "resourceLangId == lookml",
+                    "command": "lookml-highlighter.validateLookML",
+                    "group": "navigation"
+                }
+            ]
+        },
         "languages": [
             {
                 "id": "lookml",
