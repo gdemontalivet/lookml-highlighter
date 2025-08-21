@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Lams } from '@looker/look-at-me-sideways';
+import Lams = require('@looker/look-at-me-sideways');
 
 export function activate(context: vscode.ExtensionContext) {
     const collection = vscode.languages.createDiagnosticCollection('lookml');
