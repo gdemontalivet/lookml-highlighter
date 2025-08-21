@@ -1,7 +1,7 @@
-const vscode = require('vscode');
-const { Lams } = require('@looker/look-at-me-sideways');
+import * as vscode from 'vscode';
+import { Lams } from '@looker/look-at-me-sideways';
 
-function activate(context) {
+export function activate(context: vscode.ExtensionContext) {
     const collection = vscode.languages.createDiagnosticCollection('lookml');
     context.subscriptions.push(vscode.commands.registerCommand('lookml-highlighter.validateLookML', () => {
         const editor = vscode.window.activeTextEditor;
@@ -20,13 +20,13 @@ function activate(context) {
     }));
 }
 
-function updateDiagnostics(document, collection) {
+function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection) {
     if (document && document.languageId === 'lookml') {
         const lams = new Lams();
         const {
             errors
         } = lams.parse(document.getText());
-        const diagnostics = errors.map(error => {
+        const diagnostics = errors.map((error: any) => {
             const range = new vscode.Range(
                 new vscode.Position(error.line - 1, 0),
                 new vscode.Position(error.line - 1, 100)
@@ -41,7 +41,3 @@ function updateDiagnostics(document, collection) {
         collection.clear();
     }
 }
-
-module.exports = {
-    activate
-};
