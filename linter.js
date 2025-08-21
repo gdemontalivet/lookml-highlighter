@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const Lams = require('@looker/look-at-me-sideways');
+const { Lams } = require('@looker/look-at-me-sideways');
 
 function activate(context) {
     const collection = vscode.languages.createDiagnosticCollection('lookml');
